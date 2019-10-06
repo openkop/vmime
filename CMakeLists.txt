@@ -40,7 +40,7 @@ PROJECT(vmime)
 # Package version number
 SET(VMIME_VERSION_MAJOR  0)
 SET(VMIME_VERSION_MINOR  9)
-SET(VMIME_VERSION_MICRO  2k3)
+SET(VMIME_VERSION_MICRO  2k4)
 
 # API version number (libtool)
 #
@@ -53,7 +53,7 @@ SET(VMIME_VERSION_MICRO  2k3)
 # . Interfaces added/removed/changed:               CURRENT++, REVISION=0
 # . Interfaces added (upward-compatible changes):   AGE++
 # . Interfaces removed:                             AGE=0
-SET(VMIME_API_VERSION_CURRENT   2)
+SET(VMIME_API_VERSION_CURRENT   3)
 SET(VMIME_API_VERSION_REVISION  0)
 SET(VMIME_API_VERSION_AGE       0)
 
@@ -162,7 +162,7 @@ IF(VMIME_BUILD_SHARED_LIBRARY)
 		COMPILE_FLAGS -DVMIME_SHARED
 	)
 
-	execute_process(COMMAND ln -s libvmime-kopano.so.2.0.0 libvmime.so)
+	execute_process(COMMAND ln -s libvmime-kopano.so.3.0.0 libvmime.so)
 	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libvmime.so DESTINATION ${CMAKE_INSTALL_LIBDIR}/ COMPONENT libraries)
 
 ENDIF()
