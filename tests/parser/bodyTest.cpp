@@ -27,10 +27,23 @@
 VMIME_TEST_SUITE_BEGIN(bodyTest)
 
 	VMIME_TEST_LIST_BEGIN
+		VMIME_TEST(testGenerate_Mailbox)
 		VMIME_TEST(testGenerate_Text)
 		VMIME_TEST(testGenerate_NonText)
 	VMIME_TEST_LIST_END
 
+	void testGenerate_Mailbox() {
+		using namespace vmime;
+
+		// Check that ASCII display names are not encoded more than necessary
+		emailAddress e("a@b.com");
+		auto a = make_shared<mailbox>(text(word("Foo B@r", charsets::US_ASCII)), e);
+		VASSERT_EQ("generate", "\"Foo B@r\" <a@b.com>", a->generate());
+		VASSERT_NEQ("generate", "=?utf-8?Q?Foo_B=40r?= <a@b.com>", a->generate());
+
+		a = make_shared<mailbox>(text(word("Foo B@r", charsets::UTF_8)), e);
+		VASSERT_EQ("generate", "=?utf-8?Q?Foo_B=40r?= <a@b.com>", a->generate());
+	}
 
 	void testGenerate_Text() {
 
